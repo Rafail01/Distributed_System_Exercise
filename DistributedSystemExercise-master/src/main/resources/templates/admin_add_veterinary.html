@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<hr>
+</div>
+
+<form action="#" th:action="@{/AdministratorController/AdministratorAddUser/veterinarySave}" th:object="${veterinary}"
+      method="POST">
+    <input type="text" th:field="*{age}"
+           placeholder="Veterinary age" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{fullName}"
+           placeholder="Veterinary fullNAme" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{AMKA}"
+           placeholder="Veterinary AMKA" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{municipalHouse}"
+           placeholder="Veterinary municipal" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{password}"
+           placeholder="Veterinary password" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{email}"
+           placeholder="Veterinary Email" class="form-control mb-4 col-4">
+
+    <button type="submit" class="btn btn-info col-2"> Save Veterinary</button>
+</form>
+
+<hr>
+</div>
+
+</body>
+</html>

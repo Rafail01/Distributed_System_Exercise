@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .button {
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .open-button {
+            background-color: #4CAF50;;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.8;
+            position: fixed;
+            bottom: 23px;
+            right: 28px;
+            width: 280px;
+        }
+
+        /* The popup form - hidden by default */
+        .form-popup {
+            display: none;
+            position: relative;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+        }
+
+        /* The popup form - hidden by default */
+        .form-popup1 {
+            display: none;
+            position: relative;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+        }
+
+        /* Add styles to the form container */
+        .form-container {
+            max-width: 300px;
+            padding: 10px;
+            background-color: white;
+        }
+
+        /* Full-width input fields */
+        .form-container input[type=text], .form-container input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+        }
+
+        /* When the inputs get focus, do something */
+        .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        /* Set a style for the submit/login button */
+        .form-container .btn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom:10px;
+            opacity: 0.8;
+        }
+
+        /* Add a red background color to the cancel button */
+        .form-container .cancel {
+            background-color: red;
+        }
+
+        /* Add some hover effects to buttons */
+        .form-container .btn:hover, .open-button:hover {
+            opacity: 1;
+        }
+        .button1 {background-color: #4CAF50;}
+        .button2 {background-color: #4CAF50;}
+        .button2 {background-color: #4CAF50;}
+    </style>
+    <!-- code to pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js" ></script>
+    <!--    -->
+</head>
+<body>
+
+<h1>Welcome veterinary</h1>
+<p>Please choose an option:</p>
+
+<button class="button button1" onclick="openForm()">Examination statement</button>
+<!--<button class="button button2" onclick="openForm1()">Confirm examination</button>-->
+<button onClick="parent.open('http://localhost:8000/login?logout')" class="button button3">Logout</button>
+
+<div class="form-popup" id="openForm">
+    <form action="/action_page.php" class="form-container">
+        <h1>Form Examination statement</h1>
+
+        <label for="text"><b>race</b></label><br>
+        <input type="text" placeholder="Enter race" name="race" required><br>
+
+        <label for="text"><b>gender</b></label><br>
+        <input type="text" placeholder="Enter gender" name="gender" required><br>
+
+        <label for="text"><b>date of birth</b></label><br>
+        <input type="text" placeholder="Enter date of birth" name="date of birth" required><br>
+
+        <label for="text"><b>number of microchip</b></label><br>
+        <input type="text" placeholder="Enter number of microchip" name="number of microchip" required><br>
+
+        <label for="text"><b>amka owner</b></label><br>
+        <input type="text" placeholder="Enter amka owner" name="amka owner" required><br>
+
+        <label for="text"><b>date of examination</b></label><br>
+        <input type="text" placeholder="Enter date of examination" name="date of examination" required><br>
+
+        <label for="message">
+            <b><strong>Comments </strong></b>
+        </label>
+        <br>
+        <textarea class= "form-control"
+                  id="message" name="message"
+                  placeholder="Enter you message"
+                  style="height:200px">
+        </textarea>
+        <br>
+
+        <!--        <button type="submit" class="btn" >submit</button>-->
+        <a href="javascript:generatePDF()"  id="downloadButton" class="btn" >Submit</a>
+
+        <button type="button" class="btn cancel" onclick="closeForm()">close</button>
+    </form>
+</div>
+
+<!-- code to pdf -->
+<script>
+    async  function generatePDF(){
+        document.getElementById("downloadButton");
+
+        // Downloading
+        var downloading = document.getElementById("openForm")
+        var doc = new jsPDF('1', 'pt');
+
+        await html2canvas(downloading, {
+            //allowTaint: true,
+            //useCORS: true,
+            width: 530
+        }).then((canvas) => {
+            //Canvas (convert to PNG)
+            doc.addImage(canvas.toDataURL("image/png"), 'PNG', 5, 5, 1000, 500);
+        })
+
+        doc.save("Examination.pdf");
+
+        //End of downloading
+
+        document.getElementById("downloadButton").innerHTML = "Submit";
+    }
+</script>
+
+<script>
+    function openForm() {
+        document.getElementById("openForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("openForm").style.display = "none";
+    }
+
+    // function openForm1(){
+    //     document.getElementById("openForm1").style.display = "block";
+    // }
+    //
+    // function closeForm2() {
+    //     document.getElementById("openForm1").style.display = "none";
+    // }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<style>
+    .button {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .button{background-color: #4CAF50;}
+</style>
+<body>
+<div>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th>AMKA</th>
+            <th>fullName</th>
+            <th>municipalHouse</th>
+            <th>password</th>
+            <th>email</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <th:block th:each="municipalEmployee : ${listMunicipalEmployee}">
+            <tr>
+                <td th:text="${municipalEmployee.AMKA}"></td>
+                <td th:text="${municipalEmployee.fullName}"></td>
+                <td th:text="${municipalEmployee.municipalHouse}"></td>
+                <td th:text="${municipalEmployee.password}"></td>
+                <td th:text="${municipalEmployee.email}"></td>
+                <td>
+                    <a class="h4 mr-3" th:href="@{'/AdministratorController/AdministratorModificationPage/MunicipalEmployee/' + ${municipalEmployee.AMKA}}">Edit</a>
+                    <a class="h4" th:href="@{/AdministratorController/AdministratorDeletePage/MunicipalEmployee/{AMKA}(AMKA=${municipalEmployee.AMKA})}">Delete</a>
+                </td>
+            </tr>
+        </th:block>
+
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
